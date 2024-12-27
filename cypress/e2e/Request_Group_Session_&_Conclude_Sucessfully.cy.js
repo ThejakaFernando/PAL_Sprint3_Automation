@@ -61,9 +61,9 @@ describe("Group Session Request and Tutor Acceptance Flow", () => {
       cy.get('input#studentID4').type("9");
 
       // Step 14: Click the "Request" button
-      cy.get('button[type="submit"].bg-blue-500.text-white.font-semibold.py-2.px-6.rounded-md')
-          .should('be.visible')
-          .click();
+    cy.get('#request-group-session-btn')  // Select the button by ID
+    .should('be.visible')  // Ensure it's visible
+    .click(); 
 
       // Step 15: Log out
       cy.contains("Log out").should("be.visible").click();
@@ -83,6 +83,7 @@ describe("Group Session Request and Tutor Acceptance Flow", () => {
           .within(() => {
               cy.get('button.bg-green-500.text-white.py-1.px-3.rounded-md').click(); // Click the Accept button
           });
+          
 
       // Step 19: Fill out the accept request modal
       cy.get('input#location').type("L3CR8");
