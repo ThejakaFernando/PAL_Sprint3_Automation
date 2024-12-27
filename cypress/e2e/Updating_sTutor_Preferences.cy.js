@@ -1,5 +1,5 @@
 describe("User Preferences and Faculty Page Actions", () => {
-    it("should save preferences and navigate to recommended tutors", () => {
+    it("should save preferences and navigate to 'Faculty' Page and clicking the recommended tutors button", () => {
       // Step 1: Navigate to the login page and log in
       cy.visit("http://127.0.0.1:8000/login");
   

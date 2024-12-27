@@ -1,5 +1,5 @@
 describe("Quick Request Feature", () => {
-    it("should successfully make a quick request for the last group session when S-Tutor message is displayed", () => {
+    it("should successfully make a quick request for the last group session ", () => {
         // Step 1: Navigate to the login page and log in as the student
         cy.visit("http://127.0.0.1:8000/login");
         cy.get('input[name="email"]').type("fury@gmail.com");

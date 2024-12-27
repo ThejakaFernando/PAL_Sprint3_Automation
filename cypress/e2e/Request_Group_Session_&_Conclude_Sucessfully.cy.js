@@ -1,5 +1,5 @@
 describe("Group Session Request and Tutor Acceptance Flow", () => {
-  it("should successfully handle feedback requirement and request a group session", () => {
+  it("should successfully handle feedback requirement, request a group session and S-Tutor concluding it", () => {
       // Step 1: Navigate to the login page and log in as the student
       cy.visit("http://127.0.0.1:8000/login");
       cy.get('input[name="email"]').type("sara@gmail.com");

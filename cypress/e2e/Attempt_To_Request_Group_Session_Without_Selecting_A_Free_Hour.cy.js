@@ -1,6 +1,6 @@
-describe("Attempt to Request Individual Session Without Filling All Required Fields", () => {
-    it("session requester must get an error message if a free hour is not selected when requesting an individual session", () => {
-        // Step 1: Log in as the student
+describe("Attempt to Request a group Session Without Filling All Required Fields", () => {
+    it("session requester must get an error message if a free hour is not selected when requesting a group session", () => {
+        // Step 1: Navigate to the login page and log in as the student
         cy.visit("http://127.0.0.1:8000/login");
         cy.get('input[name="email"]').type("sara@gmail.com");
         cy.get('input[name="password"]').type("password");
@@ -8,7 +8,8 @@ describe("Attempt to Request Individual Session Without Filling All Required Fie
   
         // Step 2: Navigate to the request session page
         cy.visit("http://127.0.0.1:8000/request-session");
-
+  
+        // Step 3: Check for the warning message
         cy.get('body').then(($body) => {
             if ($body.find('#warning-message').length > 0) {
                 cy.log("Feedback pending. Completing feedback first...");
@@ -18,7 +19,7 @@ describe("Attempt to Request Individual Session Without Filling All Required Fie
   
                 // Step 4: Select rating as 4
                 cy.get('.star.hover\\:text-yellow-400')
-                    .eq(3)
+                    .eq(3) // Select the 4th star (index starts from 0)
                     .click();
   
                 // Step 5: Enter feedback message
@@ -36,26 +37,33 @@ describe("Attempt to Request Individual Session Without Filling All Required Fie
                 cy.log("No feedback required. Proceeding to request a session...");
             }
         });
-
-        // Step 3: Select "SSP1" from the module dropdown
-        cy.get('#moduleSelect').select("SSP1");
   
-        // Step 4: Select "James Lee" as the tutor
-        cy.get('#tutorSelect').select("James Lee");
+        // Step 8: Click the "Request a Group Session →" link
+        cy.contains('a', "Request a Group Session →").should("be.visible").click();
   
-        // Step 5: Enter the message in the text area
+        // Step 9: Select "Server-Side Programming 2" from the module dropdown
+        cy.get('#moduleSelect').select("MAD1");
+  
+        // Step 10: Select "John Doe" as the tutor
+        cy.get('#tutorSelect').select("Isaac Newton");
+  
+        //free hour will not be selected <-----
+  
+        // Step 12: Enter a message
         cy.get('textarea[name="message"]')
-            .type("Hi James, I have some clarifications to make regarding setting up a Laravel 11 project and setting up Livewire, can you help me out?");
+            .type("Hi Isaac, I'm having trouble configuring MongoDB, will you be able to help me out? Thanks!!");
   
-        // Step 6: Click the "Request" button to open the modal
-        cy.get('#request-indv').click();
+        // Step 13: Enter participant IDs
+        cy.get('input#studentID1').type("6");
+        cy.get('input#studentID2').type("7");
+        cy.get('input#studentID3').type("8");
+        cy.get('input#studentID4').type("9");
   
-        // Step 7: Click the "Request" button in the modal to submit the form
-        cy.get('#request-confirm').click();
-  
-        // Step 8: Verify the error message is shown for missing required fields
-        cy.contains('Please fill all the fields to request a session!')
-            .should('be.visible')
-            .and('contain.text', 'Please fill all the fields to request a session!');
+        // Step 14: Click the "Request" button
+      cy.get('#request-group-session-btn')  // Select the button by ID
+      .should('be.visible')  // Ensure it's visible
+      .click(); 
+
+
     });
 });

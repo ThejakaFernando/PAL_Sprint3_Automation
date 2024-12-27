@@ -1,5 +1,5 @@
 describe("Request Group Session & Student Cancels It", () => {
-    it("should successfully handle group session cancellation after acceptance", () => {
+    it("should successfully handle group session cancellation by Student after acceptance", () => {
         // Step 1: Navigate to the login page and log in as the student
         cy.visit("http://127.0.0.1:8000/login");
         cy.get('input[name="email"]').type("ben@gmail.com");
