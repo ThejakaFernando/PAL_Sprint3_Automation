@@ -100,6 +100,8 @@ describe("Request Group Session, Accept it, Chat & Conclude", () => {
         // Step 23: Send a message as the tutor
         cy.get('textarea[wire\\:model="newMessage"]').type("Hi there, since you've requested the 9.30 - 12.00 PM slot, will you be able to attend the session at around 10.00 AM? I already have a session scheduled from 9.30 to 9.50 AM so I won't be free that time. Let me know what you think!!");
         cy.get('button[type="submit"]').contains("Send").click();
+
+        cy.contains('a', "Home").click();
   
         // Step 24: Log out
         cy.contains("Log out").should("be.visible").click();
