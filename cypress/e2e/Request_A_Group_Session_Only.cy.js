@@ -48,7 +48,7 @@ describe("Group Session Request and Tutor Acceptance Flow", () => {
         cy.get('#tutorSelect').select("Mike Taylor");
   
         // Step 11: Select the radio button for the slot
-        cy.get('input[type="radio"][name="slot_id"][value="20"]').check();
+        cy.get('input[type="radio"][name="slot_id"][value="19"]').check();
   
         // Step 12: Enter a message
         cy.get('textarea[name="message"]')
