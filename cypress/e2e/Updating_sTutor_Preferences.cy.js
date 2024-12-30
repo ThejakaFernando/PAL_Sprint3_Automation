@@ -26,7 +26,7 @@ describe("User Preferences and Faculty Page Actions", () => {
       cy.visit("http://127.0.0.1:8000/faculty");
   
       // Step 6: Click the "Show Recommended Tutors for Preference" link
-      cy.contains("span", "Show Recommended Tutors for Preference")
+      cy.contains("span", "Show Tutors Teaching Preferred Modules")
         .should("be.visible")
         .click();
     });

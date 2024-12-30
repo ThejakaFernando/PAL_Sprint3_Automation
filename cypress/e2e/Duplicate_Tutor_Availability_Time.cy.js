@@ -33,6 +33,6 @@ describe("Save Availability Hour with Duplicate Check", () => {
         cy.get('button[type="submit"].bg-blue-500').click();
 
         // Step 9: Verify error message for duplicate availability
-        cy.contains("Error: This time slot overlaps with an existing slot or is a duplicate.").should("be.visible");
+        cy.contains("Error: This time overlaps with an existing time or is a duplicate.").should("be.visible");
     });
 });

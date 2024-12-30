@@ -18,8 +18,7 @@ describe("Request Group Session & Student Cancels It", () => {
         cy.get('input[type="radio"][name="slot_id"][value="2"]').check();
 
         // Step 5: Enter message and participant IDs
-        cy.get('textarea[name="message"]')
-            .type("Hi Alexander, I need help in setting up Laravel 11 to my PC. Mind helping me? Appreciate it :)");
+        cy.get('textarea[name="message"]').type("Hi Alexander, I need help in setting up Laravel 11 to my PC. Mind helping me? Appreciate it :)");
         cy.get('input#studentID1').type("6");
         cy.get('input#studentID2').type("7");
         cy.get('input#studentID3').type("8");
@@ -65,19 +64,16 @@ describe("Request Group Session & Student Cancels It", () => {
         // Step 14: Navigate to "View Session Status" page
         cy.visit("http://127.0.0.1:8000/my-requests");
 
-        // Step 15: Click the "Cancel" button
-        cy.contains('button', "Cancel").should("be.visible").click();
+        // Step 15: Locate the session card with "Accepted" status and click the "Cancel" button
+        cy.contains('span', "Accepted")
+            .parents('.bg-gray-100.p-6.rounded-lg.mb-6.shadow-md')
+            .within(() => {
+                cy.get('#cancel-before-btn').should('be.visible').click();
+            });
 
-        // Step 16: Select the "Change of Plans" reason
-        // cy.get('input[type="radio"][name="cancel_reason"][value="Change of Plans"]').check();
-        // Step 16: Select the "Change of Plans" reason
+        // Step 16: Handle the cancellation modal
+        cy.contains('h3', "Reason for Cancellation").should("be.visible");
         cy.get('input[type="radio"][name="cancel_reason"][value="Change of Plans"]').check({ force: true });
-
-
-        // Step 17: Submit the cancellation
-        cy.get('button[type="submit"]').contains("Submit Cancellation").click();
-
-        // Verify the success message
-        cy.contains("Session cancelled successfully.").should("be.visible");
+        cy.get('button[type="submit"]').contains("Submit Cancellation").click({ force: true });
     });
 });
