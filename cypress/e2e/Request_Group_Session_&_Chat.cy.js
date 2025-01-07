@@ -1,5 +1,6 @@
 describe("Request Group Session, Accepting the session & chatting", () => {
     it("should successfully handle the group session request, accept it and chat", () => {
+        
         // Step 1: Navigate to the login page and log in as the student
         cy.visit("http://127.0.0.1:8000/login");
         cy.get('input[name="email"]').type("sara@gmail.com");
@@ -120,6 +121,7 @@ describe("Request Group Session, Accepting the session & chatting", () => {
         cy.get('textarea[wire\\:model="newMessage"]').type("Hey Mike, yeah I'll be free during that time and I think my friends will also be free at that time so let's have the session at 10 AM. It won't take that long. Thank you very much!");
         cy.get('button[type="submit"]').contains("Send").click();
 
+        cy.contains('a', "Home").click();
 
         // Step 28: Log out and log in as "thejaka.fdo@gmail.com"
         cy.contains("Log out").should("be.visible").click();
